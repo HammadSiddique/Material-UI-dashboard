@@ -1,27 +1,53 @@
-import { AppBar, Toolbar, Grid, InputBase, IconButton, Badge } from '@material-ui/core'
+import { AppBar, Toolbar, Grid, InputBase, IconButton, Badge, makeStyles } from '@material-ui/core'
 import React from 'react';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import SearchIcon from '@material-ui/icons/Search';
 
+
+const useStyles = makeStyles(theme => ({
+  root:{
+    backgroundColor: '#fff'
+  },
+  searchInput:{
+    opacity: '0.6',
+    padding: `0px ${theme.spacing(1)}px`,
+    fontSize: '0.8rem',
+    '&:hover':{
+      backgroundColor: '#f7f7f7'
+    },
+    '& .MuiSvgIcon-root':{
+      marginRight: '10px'
+    }
+  }
+}))
+
 export default function Header() {
+
+  const classes = useStyles()
+
   return (
-    <AppBar position='static'>
+    <AppBar position='static' className={classes.root}>
       <Toolbar>
-        <Grid container>
-          <Grid item style={{border: '1px solid #fff'}}>
-            <InputBase />
+        <Grid container
+        alignItems='center'>
+          <Grid item>
+            <InputBase 
+            placeholder='Search topics'
+            className={classes.searchInput}
+            startAdornment={<SearchIcon fontSize='small'/>}
+            />
           </Grid>
           <Grid item sm></Grid>
-          <Grid item style={{border: '1px solid #000'}}>
+          <Grid item>
             <IconButton>
               <Badge badgeContent={4} color='secondary'>
                 <NotificationsNoneIcon fontSize="small" />
               </Badge>
             </IconButton>
             <IconButton>
-              <Badge badgeContent={10} color='secondary'>
+              <Badge badgeContent={10} color='primary'>
                 <ChatBubbleOutlineIcon fontSize="small" />
               </Badge>
             </IconButton>
