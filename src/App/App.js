@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import SideMenu from "../components/SideMenu";
 import Header from "../components/Header";
 import "./App.css";
-import PageHeader from "../components/PageHeader";
+import Employees from "./pages/Employees/Employees";
 
 const theme = createTheme({
   palette: {
@@ -50,7 +50,7 @@ function App() {
         <SideMenu />
         <div className={classes.appMain}>
           <Header />
-          <PageHeader />
+          <Employees />
         </div>
         <CssBaseline />
       </ThemeProvider>
