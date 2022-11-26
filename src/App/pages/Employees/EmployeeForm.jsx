@@ -32,6 +32,8 @@ export default function EmployeesForm() {
         <Grid item xs={6}>
           <Controls.Input name='fullName' label='Full Name' value={values.fullName} onChange={handleInputChange} />
           <Controls.Input name='email' label='Email' value={values.email} onChange={handleInputChange} />
+          <Controls.Input name='mobile' label='Mobile Number' value={values.mobile} onChange={handleInputChange} />
+          <Controls.Input name='city' label='City' value={values.city} onChange={handleInputChange} />
         </Grid>
         <Grid item xs={6}>
           <Controls.RadioGroup label='Gender' name='gender' value={values.gender} onChange={handleInputChange} items={genderItems}/>
@@ -44,6 +46,10 @@ export default function EmployeesForm() {
           />
           <Controls.DatePicker label='When was this employee hired?' name='hireDate' value={values.hireDate} onChange={handleInputChange}/>
           <Controls.Checkbox label='Is this an permanent employee?' name='isPermanent' value={values.isPermanent} onChange={handleInputChange}/>
+          <div>
+            <Controls.Button variant='contained' text='Submit' type='submit'/>
+            <Controls.Button variant="outlined" color="secondary" text='Reset'/>
+          </div>
           </Grid>
       </Grid>
     </Form>
