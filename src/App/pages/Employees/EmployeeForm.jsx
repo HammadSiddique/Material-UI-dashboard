@@ -24,22 +24,28 @@ const initialFormValues = {
 
 export default function EmployeeForm() {
 
-  const validate = () => {
-    let temp = {}
-    temp.fullName = values.fullName ? "" : 'This field is required'
-    temp.email = (/$^|.+@.+..+/).test(values.email) ? "" : 'Invalid Email'
-    temp.mobile = values.mobile.length > 6 ? "" : 'Minimum 7 digits required'
-    temp.city = values.city ? "" : 'This field is required'
-    temp.departmentId = values.departmentId != 0 ? "" : 'This field is required'
+  const validate = (fieldValues = values) => {
+    let temp = {...errors}
+    if ('fullName' in fieldValues)
+      temp.fullName = fieldValues.fullName ? "" : 'This field is required'
+    if ('email' in fieldValues)
+      temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : 'Invalid Email'
+    if ('mobile' in fieldValues)
+      temp.mobile = fieldValues.mobile.length > 6 ? "" : 'Minimum 7 digits required'
+    if ('city' in fieldValues)
+      temp.city = fieldValues.city ? "" : 'This field is required'
+    if ('departmentId' in fieldValues)    
+      temp.departmentId = fieldValues.departmentId != 0 ? "" : 'This field is required'
 
     setErrors({
       ...temp
     })
 
-    return Object.values(temp).every(x => x == "")
+    if (fieldValues == values)
+      return Object.values(temp).every(x => x == "")
   }
 
-  const {values, setValues, errors, setErrors, handleInputChange} = useForm(initialFormValues);
+  const {values, setValues, errors, setErrors, handleInputChange, resetForm} = useForm(initialFormValues, true, validate);
 
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -53,7 +59,7 @@ export default function EmployeeForm() {
         <Grid item xs={6}>
           <Controls.Input name='fullName' label='Full Name' value={values.fullName} onChange={handleInputChange} error={errors.fullName}/>
           <Controls.Input name='email' label='Email' value={values.email} onChange={handleInputChange} error={errors.email}/>
-          <Controls.Input name='mobile' label='Mobile Number' value={values.mobile} onChange={handleInputChange} error={errors.mobile}/>
+          <Controls.Input name='mobile' label='Mobile Number' value={values.mobile} onChange={handleInputChange} type='number' error={errors.mobile}/>
           <Controls.Input name='city' label='City' value={values.city} onChange={handleInputChange} error={errors.city} />
         </Grid>
         <Grid item xs={6}>
@@ -70,7 +76,7 @@ export default function EmployeeForm() {
           <Controls.Checkbox label='Is this an permanent employee?' name='isPermanent' value={values.isPermanent} onChange={handleInputChange}/>
           <div>
             <Controls.Button variant='contained' text='Submit' type='submit'/>
-            <Controls.Button variant="outlined" color="secondary" text='Reset'/>
+            <Controls.Button variant="outlined" color="secondary" text='Reset' onClick={resetForm}/>
           </div>
           </Grid>
       </Grid>
