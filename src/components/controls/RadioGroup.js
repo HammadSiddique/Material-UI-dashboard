@@ -17,7 +17,7 @@ export default function RadioGroup(props) {
           <FormControlLabel
             key={item.id}
             value={item.id}
-            control={<Radio />}
+            control={<Radio color="primary" />}
             label={item.title}
           />
         ))}
