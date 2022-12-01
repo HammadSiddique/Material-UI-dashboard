@@ -46,7 +46,7 @@ export const getAllEmployees = () => {
   let departments = getDeparmentCollection();
 
   return employees.map((data) => ({
-    data,
+    ...data,
     department: departments[data.departmentId - 1].title,
   }));
 };
