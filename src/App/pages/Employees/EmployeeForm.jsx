@@ -50,7 +50,8 @@ export default function EmployeeForm() {
   const handleSubmit = (e) =>{
     e.preventDefault()
     if (validate()){
-    window.alert('Testing')
+      employeeSerivce.insertEmployees(values)
+      resetForm()
   }}
 
   return (
