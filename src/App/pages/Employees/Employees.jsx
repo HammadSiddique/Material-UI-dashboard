@@ -41,7 +41,7 @@ export default function Employees() {
                 <TableCell>{employee.fullName}</TableCell>
                 <TableCell>{employee.email}</TableCell>
                 <TableCell>{employee.mobile}</TableCell>
-                <TableCell>{employee.department}</TableCell>
+                {/* <TableCell>{employee.department}</TableCell> */}
               </TableRow>
             ))
           }
